@@ -5,7 +5,7 @@ $err = '';
 $succ = '';
 $kashrut = '';
 session_start();
-if ($_SESSION["usr_admin"] != "מ") {
+if ($_SESSION["usr_type"] != "מ") {
     header("Location: index.html");
     die;
 }
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $err = "נא למלא הנדרש";
     } else {
         $tripdtls = addTour($name, $desc, $startDate, $duration, $price, $kosher, $AudienceCode);
-        // header("refresh:3;url=touradmin.php");
+        header("refresh:3;url=touradmin.php");
         $succ = '<span>הפעולה בוצעה בהצלחה!  
             אנא המתן או             <a href="touradmin.php">לחץ כאן</a></span>';
     }
@@ -47,8 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <link href="../css/styles-global.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <?php require_once 'menu.php';
-        ?>
+        <?php require_once 'menu.php'; ?>
         <div>
             <img src="../images/liber.png" alt="liber" class="logo" />
             <h1>ניהול חברת נסיעות של טיולים מאורגנים</h1>
@@ -62,10 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <div class="input_form"><label for="name">כותרת הטיול</label><input required type="text" id="name" name="name" placeholder="בחר שם לטיול" value="<?= $name ?>"/> </div>
                     <div class="input_form"><label for="textarea">תיאור הטיול</label>
                         <textarea name="desc" form="form" placeholder="תאר את הטיול..." ><?= $desc ?></textarea></div>
-                    <div class="input_form"><label for="startDate">תאריך התחלה</label><input required type="date" id="startDate" name="startDate" /></div>
-                    <div class="input_form"><label for="duration">אורך הטיול</label><input required type="text" placeholder="מה משך הטיול?" id="duration" name="duration" value="<?= $duration ?>" /></div>
+                    <div class="input_form"><label for="startDate">תאריך התחלה</label><input required type="date" id="startDate" name="startDate" min="2020-08-29"/></div>
+                    <div class="input_form"><label for="duration">אורך הטיול</label><input required type="text" placeholder="מה משך הטיול? (בימים)" id="duration" name="duration" value="<?= $duration ?>" /></div>
                     <div class="input_form"><label for="price">מחיר</label><input required type="number" id="price" name="price" placeholder="מחיר לנפש (ב$)" <?= $price ?> /></div>        
-                    <div class="input_form"><label for="kosher">כשרות</label><input type="checkbox" id="kosher" name="kosher" value="<?= $kashrut ?>" /></div>
+                    <div class="input_form"><label for="kosher">כשרות</label><input type="checkbox" id="kosher" name="kosher" value="<?= $kosher ?>" /></div>
                     <div class="input_form"><label for="select">קהל יעד</label> <select id="AudienceCode" name="AudienceCode">
                             <option value="<?= $AudienceCode ?>">--נא לבחור קהל יעד--</option>
                             <?php

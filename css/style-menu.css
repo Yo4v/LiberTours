@@ -1,17 +1,24 @@
 .container {
     position: fixed;
     top: 25%;
+    right: 0;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .card {
-    width: 450px;
+    width: 300px;
     background-color: rgb(27, 190, 228);
-    border-radius: 50px 25px;
+    border-radius: 0 50px;
 }
 .header {
     border-radius: 10px 10px 0px 0px;
     padding: 5px;
     background-color: #3b5998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 h2 {
     color: #ffffff;
@@ -19,32 +26,32 @@ h2 {
     font-size: 20px;
     filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.9));
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
 }
 .body li {
     font-size: 17px;
     padding: 15px;
     list-style: none;
-    width: 350px;
     color: #b5d6f5;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 200px;
 }
 li:hover {
-    transition: 1s all;
     color: #2f89fc;
-    background-color: rgba(42, 56, 65, 0.82);
+    background-color: rgba(50, 151, 179, 0.82);
+    font-size: 16px;
+    margin: 4px 2px;
+    transition: 0.3s;
 }
 .bye {
     color: white;
     background-color: red;
-      position: absolute;
-  left: 0;
-  top: 0; 
-
-
+    position: absolute;
+    left: 0;
+    top: 0; 
 }
+.bye:hover {
+background-color: darkcyan;
+  box-shadow: 0px 15px 20px rgb(24, 255, 249);
+ }

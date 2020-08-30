@@ -8,10 +8,11 @@ $succ = "";
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $uid = trim(filter_input(INPUT_POST, 'uid', FILTER_SANITIZE_SPECIAL_CHARS));
     $pwd = trim(filter_input(INPUT_POST, 'pwd', FILTER_SANITIZE_SPECIAL_CHARS));
+    $hashed_pwd = password_hash($pwd, PASSWORD_DEFAULT);
     $realname = trim(filter_input(INPUT_POST, 'realname', FILTER_SANITIZE_SPECIAL_CHARS));
     if (strlen($pwd) >= '12' || strlen($pwd) <= '4') {
         $err = "על הסיסמא להכיל לא פחות מ4 תווים ולא יותר מ12 תווים!";
-    } else if (addUser($uid, $pwd, $realname) != 0) {
+    } else if (addUser($uid, $hashed_pwd, $realname) != 0) {
         header("refresh:3;url=login.php");
         $succ = '<span>הפעולה בוצעה בהצלחה!  
             אנא המתן או

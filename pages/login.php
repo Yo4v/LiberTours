@@ -7,20 +7,21 @@ $succ = "";
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $uid = trim(filter_input(INPUT_POST, 'uid', FILTER_SANITIZE_SPECIAL_CHARS));
-    $pwd = trim(filter_input(INPUT_POST, 'pwd', FILTER_SANITIZE_SPECIAL_CHARS));
-    $usrdtls = getUserCredentials($uid, $pwd);
-    if ($usrdtls) {
-        $_SESSION['usr_ id'] = $uid;
+    $pwd = trim(filter_input    (INPUT_POST, 'pwd', FILTER_SANITIZE_SPECIAL_CHARS));
+    $hashed_pwd = password_hash($pwd, PASSWORD_DEFAULT);
+    $usrdtls = getUserCredentials($uid);
+    if ($usrdtls && password_verify($_POST["pwd"],$usrdtls['userPassword'])) {
+         $_SESSION['usr_ id'] = $uid;
         $_SESSION['usr_num'] = $usrdtls['userNum'];
         $_SESSION['usr_rlnm'] = $usrdtls['userRealname'];
-        $_SESSION['usr_admin'] = $usrdtls['userType'];
+        $_SESSION['usr_type'] = $usrdtls['userType'];
         if ($usrdtls['userType'] === 'מ') {
-            //header("refresh:3;url=touradmin.php");
+            header("refresh:3;url=touradmin.php");
             $succ = '<span>ברוך השב אדמין!  
             אנא המתן או
             <a href="touradmin.php">לחץ כאן</a></span>';
         } else {
-            //header("refresh:3;url=tourlist.php");
+            header("refresh:3;url=tourlist.php");
             $succ = '<span>נכנסת בהצלחה!  
             אנא המתן או
             <a href="tourlist.php">לחץ כאן</a></span>';
