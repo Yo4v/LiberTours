@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION['usr_num'])) {
+    header("Location: login.php");
+    die;
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,9 +24,9 @@
                     <a class="bye" href=logout.php >התנתק</a>
                     <ul>
                         <li><a href=passupdate.php>עדכון פרטים</a></li>
-                        <?php if ($_SESSION["usr_admin"] == "מ"): ?>
-                            <li><a href=newtour.php>הוספת טיול חדש למסד</a></li>
-                            <li><a href=touradmin.php>רשימת הטיולים הקיימים במסד הנתונים</a></li>
+                        <?php if ($_SESSION["usr_type"] == "מ"): ?>
+                            <li><a href=newtour.php>הוספת טיול חדש</a></li>
+                            <li><a href=touradmin.php>רשימת הטיולים הקיימים</a></li>
                         <?php else : ?>   
                             <li><a href=tourlist.php>רשימת הטיולים הפנויים</a></li>
                             <li><a href=usertour.php>טיולים שנרשמת אליהם</a></li>
