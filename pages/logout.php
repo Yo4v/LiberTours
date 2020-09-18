@@ -1,6 +1,6 @@
 <?php
 session_start();
-foreach ($_SESSION as $ky => $vlu) {
-    unset($_SESSION[$ky]);
+foreach ($_SESSION as $key => $value) {
+    unset($_SESSION[$key]);
 }
 header("Location: login.php");

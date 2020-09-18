@@ -1,26 +1,40 @@
 body {
-  direction: rtl;
-  background: rgb(27, 190, 228);
-  background: radial-gradient(
-    circle,
-    rgba(27, 190, 228, 1) 0%,
-    rgba(14, 99, 119, 1) 41%,
-    rgba(0, 0, 0, 1) 100%
-  );
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  scroll-behavior: smooth;
+    direction: rtl;
+    background: rgb(27, 190, 228);
+    background: radial-gradient(
+        circle,
+        rgba(27, 190, 228, 1) 0%,
+        rgba(14, 99, 119, 1) 41%,
+        rgba(0, 0, 0, 1) 100%
+        );
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    scroll-behavior: smooth;
 }
 .logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 h1 {
-  font-size: 50px;
-  color: whitesmoke;
-  text-shadow: #474747 3px 5px 2px;
-  margin: 15px;
-  padding: 15px;
-  text-align: center;
+    font-size: 50px;
+    color: whitesmoke;
+    text-shadow: #474747 3px 5px 2px;
+    margin: 15px;
+    padding: 15px;
+    text-align: center;
+}
+::-webkit-scrollbar {
+    width: 20px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: cornflowerblue;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(27, 190, 228);
 }

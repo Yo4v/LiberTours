@@ -8,19 +8,20 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $uid = trim(filter_input(INPUT_POST, 'uid', FILTER_SANITIZE_SPECIAL_CHARS));
     $pwd = trim(filter_input(INPUT_POST, 'pwd', FILTER_SANITIZE_SPECIAL_CHARS));
-    $usrdtls = getUserCredentials($uid, $pwd);
-    if ($usrdtls) {
+    $hashed_pwd = password_hash($pwd, PASSWORD_DEFAULT);
+    $usrdtls = getUserCredentials($uid);
+    if ($usrdtls && password_verify($_POST["pwd"], $usrdtls['userPassword'])) {
         $_SESSION['usr_ id'] = $uid;
         $_SESSION['usr_num'] = $usrdtls['userNum'];
         $_SESSION['usr_rlnm'] = $usrdtls['userRealname'];
-        $_SESSION['usr_admin'] = $usrdtls['userType'];
+        $_SESSION['usr_type'] = $usrdtls['userType'];
         if ($usrdtls['userType'] === 'מ') {
-            //header("refresh:3;url=touradmin.php");
+            header("refresh:3;url=touradmin.php");
             $succ = '<span>ברוך השב אדמין!  
             אנא המתן או
             <a href="touradmin.php">לחץ כאן</a></span>';
         } else {
-            //header("refresh:3;url=tourlist.php");
+            header("refresh:3;url=tourlist.php");
             $succ = '<span>נכנסת בהצלחה!  
             אנא המתן או
             <a href="tourlist.php">לחץ כאן</a></span>';
@@ -45,12 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <img src="../images/liber.png" alt="liber" class="logo" />
             <h1>ניהול חברת נסיעות של טיולים מאורגנים</h1>
         </div>
-        <form method="post">
-            <fieldset>
-                <legend>מסך כניסה</legend>
-                <?php if ($succ): ?>
-                    <div class="succ"><?= $succ ?></div>
-                <?php else : ?>
+        <?php if ($succ): ?>
+            <div class="succ"><?= $succ ?></div>
+        <?php else : ?>
+            <form method="post">
+                <fieldset>
+                    <legend>מסך כניסה</legend>
                     <div class="input_form"><label for="uid">מזהה:</label><input required type="email" id="uid" name="uid" placeholder="כתובת המייל שלך" value="<?= $uid ?>"/> </div>
                     <div class="input_form"><label for="pwd">סיסמא:</label><input required type="password" id="pwd" name="pwd" placeholder="הסיסמא שלך" /></div>
                     <div class="buttons"><input type="submit" class="button" value="כנס"/>
